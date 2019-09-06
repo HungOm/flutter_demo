@@ -3,6 +3,7 @@ import 'home.dart';
 import 'feeds.dart';
 import 'context.dart';
 
+
 void main() => runApp(MyApp());
 
 // class MyApp extends StatelessWidget {
@@ -30,8 +31,8 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
-    Dashboard.tag: (context) => Dashboard(),
-    DescriptionPage.tag: (context) => DescriptionPage(null),
+    HomePage.tag: (context) => HomePage(),
+    DescriptionPage.tag: (context) => DescriptionPage(null,null,null,null,null),
     NewsFeedPage.tag: (context) => NewsFeedPage(null)
   };
 
@@ -41,9 +42,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: new ThemeData(primaryColor: Color.fromRGBO(58, 66, 86, 1.0)),
       
-      home: Dashboard(),
+      home: HomePage(),
       routes: routes,
+      
     );
+    
   }
 }
 
@@ -131,3 +134,13 @@ class MyApp extends StatelessWidget {
 //     );
 //   }
 // }
+//  @override
+//   Widget build(BuildContext context) {
+//     return new Scaffold(
+//       appBar: new AppBar(
+//         title: new Text(widget.title),
+//       ),
+//       body: new ... (...),
+          
+//     );
+//   }

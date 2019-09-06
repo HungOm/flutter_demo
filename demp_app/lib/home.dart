@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'feeds.dart';
-class Dashboard extends StatefulWidget {
+import 'dart:io';
+class HomePage extends StatefulWidget {
   static String tag = 'home-page';
   @override
-  _DashboardState createState() => _DashboardState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,6 +17,8 @@ class _DashboardState extends State<Dashboard> {
         elevation: 8.8,
         backgroundColor: Color.fromRGBO(77, 77, 77, 1.0),
       ),
+
+      
 
 
           body: Container(
@@ -37,23 +40,31 @@ class _DashboardState extends State<Dashboard> {
           padding: EdgeInsets.all(3.0),
           
           children: <Widget>[
-            makeDashboardItem("assets/business.jpg","Business Headlines", context,1),
-            makeDashboardItem("assets/time-magazine.jpg","Time", context,2),
-            makeDashboardItem("assets/tc.png","TechCrunch", context,3),
-            makeDashboardItem("assets/apple.jpg","Apple news", context,4),
-            makeDashboardItem("assets/huawei.png","Huawei news", context,5),
-            makeDashboardItem("assets/wsj.jpeg","Wall Streeth", context,6)
+            homePageItem("assets/business.jpg","Business Headlines", context,1),
+            homePageItem("assets/time-magazine.jpg","Time", context,2),
+            homePageItem("assets/tc.png","TechCrunch", context,3),
+            homePageItem("assets/apple.jpg","Apple news", context,4),
+            homePageItem("assets/huawei.png","Huawei news", context,5),
+            homePageItem("assets/wst.png","Wall Streeth", context,6)
           ],
     
         ),
+        
       ),
+        floatingActionButton: new FloatingActionButton(
+            onPressed: ()=> exit(0),
+            tooltip: 'Close app',
+            child: new Icon(Icons.close),
+          ), 
+      
 
       );
+      
       
   }
 }
 
-Card makeDashboardItem(String imageVal,String title, BuildContext context, int number) {
+Card homePageItem(String imageVal,String title, BuildContext context, int number) {
     return Card(
        elevation: 1.0,
         margin: new EdgeInsets.all(8.0),

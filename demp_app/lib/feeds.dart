@@ -5,7 +5,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'context.dart';
-import 'dart:io';
 
 class NewsFeedPage extends StatelessWidget {
   static String tag = "NewsFeedPage-tag";
@@ -41,7 +40,7 @@ class NewsFeedPage extends StatelessWidget {
             flex: 1,
             child: new Container(
                 width: width,
-                color: Colors.white,
+                color: Colors.black12,
                 child: new GestureDetector(
                   child: new FutureBuilder<List<News>>(
                     future: fatchNews(
@@ -65,28 +64,28 @@ class NewsFeedPage extends StatelessWidget {
 Future<List<News>> fatchNews(http.Client client, id) async {
   String url;
   if (id == 1) {
-    url = Variable.base_url +
+    url = Constant.baseUrl +
         "top-headlines?country=my&category=business&apiKey=" +
-        Variable.key;
+        Constant.key;
   } else if (id == 2) {
-    url = Variable.base_url +
+    url = Constant.baseUrl +
         "everything?q=time&sortBy=publishedAt&apiKey=" +
-        Variable.key;
+        Constant.key;
   } else if (id == 3) {
-    url = Variable.base_url +
+    url = Constant.baseUrl +
         "top-headlines?sources=bbc-news&apiKey=" +
-        Variable.key;
+        Constant.key;
   } else if (id == 4) {
-    url = Variable.base_url +
+    url = Constant.baseUrl +
         "everything?q=apple&sortBy=publishedAt&apiKey=" +
-        Variable.key;
+        Constant.key;
   } else if (id == 5) {
     url =
-        Variable.base_url + "everything?q=huawei&sortBy=popularity&apiKey=" + Variable.key;
+        Constant.baseUrl + "everything?q=huawei&sortBy=popularity&apiKey=" + Constant.key;
 
   } else if (id == 6) {
     url =
-        Variable.base_url + "everything?domains=wsj.com&apiKey=" + Variable.key;
+        Constant.baseUrl + "everything?domains=wsj.com&apiKey=" + Constant.key;
   }
   final response = await client.get(url);
   return compute(parsenews, response.body);
@@ -104,8 +103,9 @@ class News {
   String title;
   String description;
   String url;
+  String imageUrl;
 
-  News({this.auther, this.title, this.description, this.url});
+  News({this.auther, this.title, this.description, this.url,this.imageUrl});
 
   factory News.fromJson(Map<String, dynamic> json) {
     return News(
@@ -113,6 +113,7 @@ class News {
       title: json['title'] as String,
       description: json['description'] as String,
       url: json['url'] as String,
+      imageUrl: json['urlToImage'] as String,
     );
   }
 }
@@ -125,6 +126,8 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+         scrollDirection: Axis.vertical,
+        shrinkWrap: true,
       itemCount: news.length,
       itemBuilder: (context, index) {
         return new Card(
@@ -132,18 +135,25 @@ class NewsList extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
              leading: Container(
               padding: EdgeInsets.only(right: 12.0),
+              
               decoration: new BoxDecoration(
+                
               border: new Border(
-              right: new BorderSide(width: 1.0, color: Colors.white24))),
-              child: Icon(Icons.autorenew, color: Colors.black),
+              right: new BorderSide(width: 1.0, color: Colors.black12))),
+              // child: Icon(Icons.event_note, color: Colors.white),
+              child: Image.network(news[index].imageUrl,height: 100,width: 70),
         ),
             title: Text(news[index].title),
             onTap: () {
-              var url = news[index].url;
+              var imageUrl = news[index].imageUrl;
+              var title = news[index].title;
+              var descrioption = news[index].description;
+              var name = news[index].auther;
+              var url =news[index].url;
               Navigator.push(
                   context,
                   new MaterialPageRoute(
-                    builder: (BuildContext context) => new DescriptionPage(url),
+                    builder: (BuildContext context) => new DescriptionPage(name,url,imageUrl,title,descrioption),
                   ));
             },
           ),

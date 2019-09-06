@@ -26,10 +26,22 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: ^0.11.3+16
   flutter_webview_plugin: "0.3.7"
+  link: ^1.0.0
+  flutter_launcher_icons: "^0.7.0"
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+flutter_icons:
+    ios: true
+    android: true
+    image_path_ios: "assets/launcher/icon.png"
+    image_path_android: "assets/launcher/icon.png"
+    # adaptive_icon_background: "assets/launcher/background.png"
+    # adaptive_icon_foreground: "assets/launcher/foreground.png"
+
 
 
 # For information on the generic Dart part of this file, see the
@@ -81,3 +93,4 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
