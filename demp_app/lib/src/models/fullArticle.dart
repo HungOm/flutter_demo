@@ -1,55 +1,21 @@
-// import 'package:flutter/material.dart';
-// import 'feeds.dart';
-// import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-
-// // void main() => runApp(new DescriptionPage(null));
-
-// class DescriptionPage extends StatelessWidget {
-//   static String tag = 'description-page';
-//   DescriptionPage(this.urlnews);
-//   final String urlnews;
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: new AppBar(
-//         title: new Text(
-//           "Full Article",
-//           style: new TextStyle(color: Colors.white),
-//         ),
-//         iconTheme: IconThemeData(color: Colors.white),
-//       ),
-//       body: new SafeArea(
-//         child: new Column(
-//           children: <Widget>[
-//             MaterialApp(
-//               routes: {
-//                 "/": (_) => new WebviewScaffold(
-//                       url: urlnews,
-//                       appBar: new AppBar(title: new Text("")),
-//                     )
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
 
 import 'package:flutter/material.dart';
-// import 'feeds.dart';
-import 'package:link/link.dart';
+import '../webPage.dart';
+// import 'package:link/link.dart';
+// import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
-// void main() => runApp(new DescriptionPage(null));
 
-class DescriptionPage extends StatelessWidget {
+
+class FullArticlePage extends StatelessWidget {
   static String tag = 'description-page';
   
-  DescriptionPage(this.name,this.url,this.imageUrl,this.title,this.descritption);
+  FullArticlePage(this.author,this.url,this.imageUrl,this.title,this.descritption,this.web);
   final imageUrl;
   final title;
   final  descritption;
-  final name;
+  final author;
   final url;
+  final web;
   Widget build(BuildContext context) {
 
 
@@ -60,7 +26,7 @@ class DescriptionPage extends StatelessWidget {
         // SizedBox(height: 120.0),
        
         
-        SizedBox(height: 10.0, width: MediaQuery.of(context).size.width,
+        SizedBox(height: 50.0, width: MediaQuery.of(context).size.width,
 ),
         
         Flexible(
@@ -76,11 +42,34 @@ class DescriptionPage extends StatelessWidget {
           child: new Divider(color: Colors.green),
         ),
 
-           Text(
-          "by $name",
-          style: TextStyle(color: Colors.white24, fontSize: 20.0),
+        SizedBox(height: 30.0),
+
+
+
+            Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+           
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                // mainAxisSize: MainAxisSize.max,
+
+                children: <Widget>[
+                  
+                  Text('$web',style: TextStyle(fontSize: 20.2,color:Colors.white),overflow: TextOverflow.ellipsis,),
+                
+                  Text('$author',style: TextStyle(fontSize: 13.2,color:Colors.white),overflow: TextOverflow.clip,maxLines: 1,),
+                ],
+              ),
+
+                   
+            //         ),
+            // var randomVariable = "MMMM";
+
+          ],
         ),
-        // SizedBox(height: 30.0),
+
+     
        
       ],
     );
@@ -111,16 +100,34 @@ class DescriptionPage extends StatelessWidget {
       style: TextStyle(fontSize: 19.5),
       overflow: TextOverflow.clip,
     );
+
+    
     final readButton = Container(
+      
         padding: EdgeInsets.symmetric(vertical: 10.0),
         width: MediaQuery.of(context).size.width*1.2,
+    
+
         child: RaisedButton(
-          onPressed: () => {
+
+
+
+          onPressed: () {
+
+            WebViewContainer(url);
+
+            // var urlm = url;
+            // print(urlm);
+            //   Navigator.push(
+            //       context,
+            //       new MaterialPageRoute(
+            //         builder: (BuildContext context) => new DescriptionPage(urlm),
+            //       ));
           },
-          color: Color.fromRGBO(58, 66, 86, 1.0),
+          color: Color.fromRGBO( 71, 107, 158, 1.0),
           // width:width;
           child:
-              Text("link", style: TextStyle(color: Colors.white)),
+              Text("Read full story", style: TextStyle(color: Colors.white)),
         ));
     final bottomContent = Container(
       // height: MediaQuery.of(context).size.height,
@@ -136,8 +143,9 @@ class DescriptionPage extends StatelessWidget {
 
     return Scaffold(
       appBar: new AppBar(
+        backgroundColor: Color.fromRGBO( 71, 107, 158, 2.0),
         title: new Text(
-          'Full article page',
+          '$web',
           style: new TextStyle(color: Colors.white),
         ),
         iconTheme: IconThemeData(color: Colors.white),
@@ -151,7 +159,8 @@ class DescriptionPage extends StatelessWidget {
         child: new Column(
           children: <Widget>[
               topContent, 
-              bottomContent
+              bottomContent,          
+              
 
           ],
         ),
@@ -159,3 +168,30 @@ class DescriptionPage extends StatelessWidget {
     );
   }
 }
+
+
+// void main() => runApp(new FullPage(null));
+
+// class FullPage extends StatelessWidget {
+//   static String tag = 'web-page';
+//   FullPage(this.urlnews);
+//   final String urlnews;
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: new AppBar(
+//         title: new Text(
+//           "Full Article",
+//           style: new TextStyle(color: Colors.white),
+//         ),
+//         iconTheme: IconThemeData(color: Colors.white),
+//       ),
+//       body: new SafeArea(
+//         child: new Column(
+//           children: <Widget>[
+  
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
